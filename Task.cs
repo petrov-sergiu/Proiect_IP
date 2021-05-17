@@ -6,21 +6,39 @@ using System.Threading.Tasks;
 
 namespace proiectIP
 {
+    {
+    public enum StatusTask{
+        in_progress = 1,
+        completed = 2,
+        abandoned = 3
+    }
+
+  
     public class Task
     {
-        private string _name;
-        private string _status;
-        private string _pathImage;
+        string _taskName;
+        string _taskDetails;
+        StatusTask _progressTask;
+        DateTime _startTask;
+        DateTime _endDate;
+    
 
-        public Task(string name, string status,string _path)
+        Task(string taskName, string taskDetails, DateTime startTask, DateTime endDate)
         {
-            _name = name;
-            _status = status;
-            _pathImage = _path;
+            _taskName = taskName;
+            _taskDetails = taskDetails;
+            _startTask = startTask;
+            _endDate = endDate;
+            _progressTask = StatusTask.in_progress;
         }
-        public string GetName()
+
+        public Task(string taskName, string taskDetails, DateTime startTask, DateTime endDate, StatusTask progressTask)
         {
-            return _name;
+            _taskName = taskName;
+            _taskDetails = taskDetails;
+            _startTask = startTask;
+            _endDate = endDate;
+            _progressTask = progressTask;
         }
 
     }
