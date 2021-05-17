@@ -14,17 +14,18 @@ namespace proiectIP
     }
 
   
-      public class Task
+     public class Task
     {
-        string _taskName;
-        string _taskDetails;
+        
+        private string _taskName;
+        private string _taskDetails;
         private string _pathImage;
-        StatusTask _progressTask;
-        DateTime _startTask;
-        DateTime _endDate;
+        private StatusTask _progressTask;
+        private DateTime _startTask;
+        private DateTime _endDate;
     
 
-        Task(string taskName, string taskDetails, string path, DateTime startTask, DateTime endDate)
+        public Task(string taskName, string taskDetails, string path, DateTime startTask, DateTime endDate)
         {
             _taskName = taskName;
             _taskDetails = taskDetails;
@@ -43,6 +44,7 @@ namespace proiectIP
             _endDate = endDate;
             _progressTask = progressTask;
         }
+
 
     }
 }
