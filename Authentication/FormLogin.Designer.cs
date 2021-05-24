@@ -129,6 +129,7 @@ namespace Authentication
             this.Controls.Add(this.labelLogin);
             this.Name = "FormAuth";
             this.Text = "Authentication";
+            this.Load += new System.EventHandler(this.FormAuth_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

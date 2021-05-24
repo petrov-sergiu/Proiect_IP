@@ -41,6 +41,7 @@ namespace Authentication
             this.labelTaskPhoto = new System.Windows.Forms.Label();
             this.labelTaskStatus = new System.Windows.Forms.Label();
             this.comboBoxTaskStatus = new System.Windows.Forms.ComboBox();
+            this.AddButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTaskPhoto)).BeginInit();
             this.SuspendLayout();
             // 
@@ -116,7 +117,7 @@ namespace Authentication
             // 
             this.richTextBoxTaskNote.Location = new System.Drawing.Point(20, 104);
             this.richTextBoxTaskNote.Name = "richTextBoxTaskNote";
-            this.richTextBoxTaskNote.Size = new System.Drawing.Size(302, 270);
+            this.richTextBoxTaskNote.Size = new System.Drawing.Size(302, 205);
             this.richTextBoxTaskNote.TabIndex = 10;
             this.richTextBoxTaskNote.Text = "";
             this.richTextBoxTaskNote.TextChanged += new System.EventHandler(this.richTextBoxTaskNote_TextChanged);
@@ -161,11 +162,24 @@ namespace Authentication
             this.comboBoxTaskStatus.TabIndex = 14;
             this.comboBoxTaskStatus.SelectedIndexChanged += new System.EventHandler(this.comboBoxTaskStatus_SelectedIndexChanged);
             // 
+            // AddButton
+            // 
+            this.AddButton.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.AddButton.ForeColor = System.Drawing.Color.Coral;
+            this.AddButton.Location = new System.Drawing.Point(20, 344);
+            this.AddButton.Name = "AddButton";
+            this.AddButton.Size = new System.Drawing.Size(70, 30);
+            this.AddButton.TabIndex = 15;
+            this.AddButton.Text = "Add";
+            this.AddButton.UseVisualStyleBackColor = true;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
+            // 
             // FormTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(599, 386);
+            this.Controls.Add(this.AddButton);
             this.Controls.Add(this.comboBoxTaskStatus);
             this.Controls.Add(this.labelTaskStatus);
             this.Controls.Add(this.labelTaskPhoto);
@@ -200,5 +214,6 @@ namespace Authentication
         private System.Windows.Forms.Label labelTaskPhoto;
         private System.Windows.Forms.Label labelTaskStatus;
         private System.Windows.Forms.ComboBox comboBoxTaskStatus;
+        private System.Windows.Forms.Button AddButton;
     }
 }

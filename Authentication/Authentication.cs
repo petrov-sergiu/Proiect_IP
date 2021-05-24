@@ -6,12 +6,10 @@ using System.Windows.Forms;
 
 namespace Authentication
 {
-    class Authentication
+    public class Authentication
     {
         private static List<User> _users;
-        private static User _currentUser;
-        private const string Path = "Secure\\";
-
+        private const string Path = "Documents\\";
         public struct User
         {
             public readonly string Name;
@@ -23,50 +21,62 @@ namespace Authentication
                 PassHash = passHash;
             }
         }
-        // read from file users.txt
-        // if user exists error messae
-        // if user does not exist write user to file users.txt
-
-        // read file from users.txt
-        // if user does not exist error message
-        // if user exists redirect to main form signed as current user
-        public static bool Login(string username, string password)
+        public void ReadUsers()
         {
-            foreach (User u in _users)
+            //open document, read data, add to hashtable
+            _users = new List<User>();
+            StreamReader line = new StreamReader(Path + "users.txt");
+            while (line.Peek() != -1)
             {
-                if (u.Name.Equals(username) && u.PassHash.Equals(Cryptography.HashString(password)))
-                {
-                    _currentUser = u;
-                    return true;
-                }
+                string[] toks = line.ReadLine().Split('\t');
+                User user = new User(toks[0], toks[1]);
+                _users.Add(user);
             }
+            line.Close();
+        }
+        public bool NoUsers()
+        {
+            if (_users == null)
+                return true;
             return false;
         }
-
-        public static void AddUser(string user, string pass)
+        public bool UserExists(string user)
         {
             foreach (User u in _users)
             {
                 if (u.Name.Equals(user))
                 {
-                    MessageBox.Show("Utilizatorul exista deja!");
-                    return;
+                    return true;
                 }
             }
+            return false;
+        }
+        public void AddUser(string user, string pass)
+        {
             User newUser = new User(user, Cryptography.HashString(pass));
             _users.Add(newUser);
-            SaveUsers();
-            MessageBox.Show("Utilizatorul a fost adaugat cu succes!");
+            SaveUser();
         }
-
-        private static void SaveUsers()
+        private void SaveUser()
         {
-            StreamWriter sw = new StreamWriter(Path + "utilizatori.txt");
+            StreamWriter sw = new StreamWriter(Path + "users.txt");
             foreach (User u in _users)
             {
                 sw.WriteLine(u.Name + "\t" + u.PassHash);
             }
             sw.Close();
         }
+        public bool PassIsRight(string password)
+        {
+            foreach (User u in _users)
+            {
+                if (u.PassHash.Equals(Cryptography.HashString(password)))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 }

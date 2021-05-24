@@ -13,10 +13,11 @@ namespace Authentication
 {
     public partial class FormAuth : Form
     {
-        private const string Path = "Files\\";
+        private readonly Authentication _auth;
         public FormAuth()
         {
             InitializeComponent();
+            _auth = new Authentication();
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -25,22 +26,27 @@ namespace Authentication
             string password = textBoxPassword.Text;
 
             // TODO: open json file
-
-
-            if (Authentication.Login(username, password))
+            if (username != string.Empty || password != string.Empty)
             {
-                // TODO: login as the current user
-                // redirect to the app
-                new MainForm().Show();
-                this.Hide();
+                if (_auth.UserExists(username) && _auth.PassIsRight(password))
+                {
+                    this.Hide();
+                    MainForm home = new MainForm();
+                    home.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid username or password, Please try again", "Login failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    textBoxUsername.Text = "";
+                    textBoxPassword.Text = "";
+                    textBoxUsername.Focus();
+                }
             }
             else
             {
-                // else error message
-                MessageBox.Show("Invalid username or password, Please try again", "Login failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter values in every field", "Login failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 textBoxUsername.Text = "";
                 textBoxPassword.Text = "";
-                textBoxUsername.Focus();
             }
         }
 
@@ -51,6 +57,11 @@ namespace Authentication
             // redirect to register form 
             new FormReg().Show();
             this.Hide();
+        }
+
+        private void FormAuth_Load(object sender, EventArgs e)
+        {
+            _auth.ReadUsers();
         }
     }
 }
