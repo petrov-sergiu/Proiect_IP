@@ -13,6 +13,7 @@ namespace Authentication
         public FormTask()
         {
             InitializeComponent();
+            this.CenterToScreen();
         }
 
         private void textBoxTaskName_TextChanged(object sender, EventArgs e)

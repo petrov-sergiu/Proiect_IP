@@ -13,11 +13,14 @@ namespace Authentication
 {
     public partial class FormAuth : Form
     {
-        private readonly Authentication _auth;
+        //private readonly Authentication _auth;
+        private ProxyAuthManager _proxyAuthManager;
         public FormAuth()
         {
             InitializeComponent();
-            _auth = new Authentication();
+            //_auth = new Authentication();
+            _proxyAuthManager = new ProxyAuthManager();
+            this.CenterToScreen();
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -28,7 +31,7 @@ namespace Authentication
             // TODO: open json file
             if (username != string.Empty || password != string.Empty)
             {
-                if (_auth.UserExists(username) && _auth.PassIsRight(password))
+                if (_proxyAuthManager.Login(username, password))
                 {
                     this.Hide();
                     MainForm home = new MainForm();
@@ -61,7 +64,7 @@ namespace Authentication
 
         private void FormAuth_Load(object sender, EventArgs e)
         {
-            _auth.ReadUsers();
+            
         }
     }
 }

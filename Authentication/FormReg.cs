@@ -6,17 +6,19 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using static Authentication.Authentication;
 
 namespace Authentication
 {
     public partial class FormReg : Form
     {
-        private readonly Authentication _auth;
+        //private readonly Authentication _auth;
+        private ProxyAuthManager _proxyAuthManager;
         public FormReg()
         {
             InitializeComponent();
-            _auth = new Authentication();
+            //_auth = new Authentication();
+            _proxyAuthManager = new ProxyAuthManager();
+            this.CenterToScreen();
         }
 
         private void LinkLabelLogin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -35,7 +37,7 @@ namespace Authentication
                 if (password == passConfirm)
                 {
                     //search username in list
-                    if (!(_auth.NoUsers()) && _auth.UserExists(username))
+                    if (_proxyAuthManager.UserExists(username))
                     {
                         MessageBox.Show("Username already exists, please try another", "Registration failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         textBoxUsername.Text = "";
@@ -45,7 +47,7 @@ namespace Authentication
                     else
                     {
                         // TODO: add to file a new user
-                        _auth.AddUser(username, password);
+                        _proxyAuthManager.AddUser(username, password);
                         textBoxUsername.Text = "";
                         textBoxConfPassw.Text = "";
                         textBoxPassword.Text = "";
@@ -69,7 +71,12 @@ namespace Authentication
 
         private void FormReg_Load(object sender, EventArgs e)
         {
-            _auth.ReadUsers();
+        
+        }
+
+        private void labelLogin_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

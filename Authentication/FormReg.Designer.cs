@@ -54,6 +54,7 @@ namespace Authentication
             this.labelLogin.Size = new System.Drawing.Size(154, 31);
             this.labelLogin.TabIndex = 1;
             this.labelLogin.Text = "Signup Form";
+            this.labelLogin.Click += new System.EventHandler(this.labelLogin_Click);
             // 
             // labelUsername
             // 

@@ -210,6 +210,8 @@ namespace Authentication
             this.Controls.Add(this.ButtonAddTask);
             this.Name = "MainForm";
             this.Text = "Task Management";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

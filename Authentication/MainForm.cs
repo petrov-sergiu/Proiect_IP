@@ -13,6 +13,7 @@ namespace Authentication
         public MainForm()
         {
             InitializeComponent();
+            this.CenterToScreen();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -34,6 +35,16 @@ namespace Authentication
         private void buttonLogOut_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
